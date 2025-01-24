@@ -23,7 +23,7 @@ public class SampleController : ApiController
     {
         var result = await mediator.Send(new ListSamplesQuery());
         return result.Match(
-            samples => Ok(samples.Select(s => new SampleRecord(s.Id.ToString(), s.Name, s.Description))),  // Map domain entity to DTO
+            samples => Ok(samples.Select(s => new SampleRecord(s.Id?.ToString() ?? string.Empty, s.Name, s.Description))),  // Map domain entity to DTO
             Problem);
     }
 
@@ -52,7 +52,7 @@ public class SampleController : ApiController
         var command = new AddSampleCommand(request.Name, request.Description);
         var result = await mediator.Send(command);
         return result.Match(
-            sample => Ok(new SampleRecord(sample.Id.ToString(), sample.Name, sample.Description)),
+            sample => Ok(new SampleRecord(sample.Id.ToString() ?? string.Empty, sample.Name, sample.Description)),
             Problem);
     }
 

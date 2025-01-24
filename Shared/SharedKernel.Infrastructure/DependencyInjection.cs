@@ -1,10 +1,12 @@
 using System.Text;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+
 using SharedKernel.Authorization.Interfaces;
 using SharedKernel.Infrastructure.Authentication.Decorator;
 using SharedKernel.Infrastructure.Authentication.TokenGenerator;
@@ -106,6 +108,9 @@ public static class DependencyInjection
 
         // Database Selector
         services.AddSingletonOptions<DatabaseSelectorOptions>(configuration, DatabaseSelectorOptions.Section);
+
+        // Hosted Services Selector
+        services.Configure<HostedServicesSelectorOptions>(configuration.GetSection(HostedServicesSelectorOptions.Section));
 
         // Message Broker
         services.AddOptions();

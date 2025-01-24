@@ -2,8 +2,8 @@
   <ItemGroup>
     <ProjectReference Include="..\AuthApi.Domain\AuthApi.Domain.csproj" />
     <ProjectReference Include="..\AuthApi.Application\AuthApi.Application.csproj" />
-    <ProjectReference Include="..\..\..\SharedKernel\SharedKernel.csproj" />
-    <ProjectReference Include="..\..\..\SharedKernel.Infrastructure\SharedKernel.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\..\Shared\SharedKernel\SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\..\Shared\SharedKernel.Infrastructure\SharedKernel.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

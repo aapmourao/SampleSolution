@@ -1,5 +1,6 @@
 using CleanTemplate.Application;
 using CleanTemplate.Infrastructure;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Models;
