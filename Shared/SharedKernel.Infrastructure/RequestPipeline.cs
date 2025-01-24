@@ -15,7 +15,7 @@ public static class RequestPipeline
         var configuration = app.ApplicationServices.GetService<IConfiguration>();
 
         app.UseMiddleware<DbHealthCheckMiddleware>();
-        app.UseMiddleware<DummyHealthCheckMiddleware>();
+        app.UseMiddleware<RootHealthCheckMiddleware>();
         if (configuration is not null
             && (configuration.GetValue<bool>("HostedServicesSelector:PublishIntegrationEventsBackgroundService")
             || configuration.GetValue<bool>("HealthChecks:HostedServicesSelector:PublishIntegrationEventsBackgroundService")))

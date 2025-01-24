@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
 using RabbitMQ.Client;
+
 using SharedKernel.Infrastructure.Common.Settings;
 
 namespace SharedKernel.Infrastructure.Middleware;
@@ -10,23 +13,28 @@ public class RabbitMqHealthCheckMiddleware
     private readonly RequestDelegate _next;
     private readonly ILogger<RabbitMqHealthCheckMiddleware> _logger;
     private readonly ConnectionFactory _connectionFactory;
+    private readonly HostedServicesSelectorOptions _options;
 
-    public RabbitMqHealthCheckMiddleware(RequestDelegate next, ILogger<RabbitMqHealthCheckMiddleware> logger, ConnectionFactory connectionFactory)
+    public RabbitMqHealthCheckMiddleware(
+        RequestDelegate next,
+        IOptions<HostedServicesSelectorOptions> options,
+        ILogger<RabbitMqHealthCheckMiddleware> logger, ConnectionFactory connectionFactory)
     {
         _next = next;
+        _options = options.Value;
         _logger = logger;
         _connectionFactory = connectionFactory;
     }
 
-    public async Task InvokeAsync(HttpContext context, HostedServicesSelectorOptions options)
+    public async Task InvokeAsync(HttpContext context)
     {
         if (context.Request.Path.Equals("/health/rabbitmq", StringComparison.OrdinalIgnoreCase))
         {
             var isEnabled = "Enabled";
             var isDisabled = "Disabled";
-            var status = options.ConsumeIntegrationEventsBackgroundService ? isEnabled : isDisabled;
+            var status = _options.ConsumeIntegrationEventsBackgroundService ? isEnabled : isDisabled;
             await context.Response.WriteAsync($"Consume Integration services is {status}");
-            status = options.PublishIntegrationEventsBackgroundService ? isEnabled : isDisabled;
+            status = _options.PublishIntegrationEventsBackgroundService ? isEnabled : isDisabled;
             await context.Response.WriteAsync($"Publish Integration services is {status}");
 
             try

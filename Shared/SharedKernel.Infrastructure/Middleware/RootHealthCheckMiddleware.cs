@@ -1,23 +1,24 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 using SharedKernel.Infrastructure.Common.Settings;
 
 namespace SharedKernel.Infrastructure.Middleware;
 
-public class DummyHealthCheckMiddleware
+public class RootHealthCheckMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly ILogger<DummyHealthCheckMiddleware> _logger;
+    private readonly ILogger<RootHealthCheckMiddleware> _logger;
     private readonly HostedServicesSelectorOptions _options;
 
-    public DummyHealthCheckMiddleware(
+    public RootHealthCheckMiddleware(
         RequestDelegate next,
-        HostedServicesSelectorOptions options,
-        ILogger<DummyHealthCheckMiddleware> logger)
+        IOptions<HostedServicesSelectorOptions> options,
+        ILogger<RootHealthCheckMiddleware> logger)
     {
         _next = next;
-        _options = options;
+        _options = options.Value;
         _logger = logger;
     }
 
@@ -27,12 +28,15 @@ public class DummyHealthCheckMiddleware
         {
             try
             {
-                await context.Response.WriteAsync($"Health Checks: ");
-                await context.Response.WriteAsync($" - <a href='db' target='_self'>Database</a>");
+                context.Response.ContentType = "text/html";
+                await context.Response.WriteAsync($"<html><body>Health Checks: ");
+                await context.Response.WriteAsync($"<ul><li><a href='health/db' target='_self'>Database</a></li>");
                 if (_options.ConsumeIntegrationEventsBackgroundService || _options.PublishIntegrationEventsBackgroundService)
-                    await context.Response.WriteAsync($" - <a href='rabbitmq' target='_self'>Rabbit Mq</a>");
+                    await context.Response.WriteAsync($"<li><a href='health/rabbitmq' target='_self'>Rabbit Mq</a></li>");
                 else
-                    await context.Response.WriteAsync($" - Rabbit Mq (not available)");
+                    await context.Response.WriteAsync($"<li>Rabbit Mq (not available)</li>");
+
+                await context.Response.WriteAsync($"</ul></body></html>");
 
             }
             catch (Exception ex)
