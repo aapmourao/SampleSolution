@@ -1,0 +1,56 @@
+<Project>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <NetCoreVersion>9.0.0</NetCoreVersion>
+
+        <MicrosoftAspNetCoreMvc>2.2.0</MicrosoftAspNetCoreMvc>
+        <MicrosoftAspNetCoreAuthentication>2.2.0</MicrosoftAspNetCoreAuthentication>
+        <MicrosoftVisualStudioThreading>17.11.20</MicrosoftVisualStudioThreading>
+
+        <!-- Used by: API -->
+        <SwashbuckleAspNetCore>6.7.3</SwashbuckleAspNetCore>
+        <MicrosoftAspNetCoreMvcVersioning>5.1.0</MicrosoftAspNetCoreMvcVersioning>
+
+        <!-- Used by: Api, Application -->
+        <MediatR>12.4.1</MediatR>
+        <ErrorOr>2.0.1</ErrorOr>
+        <ArdalisSmartEnum>8.2.0</ArdalisSmartEnum>
+        <Throw>1.4.0</Throw>
+        <FluentValidation>11.11.0</FluentValidation>
+        <FluentValidationAspNetCore>11.3.0</FluentValidationAspNetCore>
+
+        <!-- Used by: Infrastructure -->
+        <SystemIdentityModelTokensJwT>8.1.0</SystemIdentityModelTokensJwT>
+        <BCryptNetNext>4.0.3</BCryptNetNext>
+        <RabbitmqClient>6.8.1</RabbitmqClient>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <!-- Unit tests -->
+        <coverletCollector>6.0.2</coverletCollector>
+        <MicrosoftNETTestSdk>17.10.0</MicrosoftNETTestSdk>
+        <xunit>2.9.0</xunit>
+        <xunitRunnerVisualstudio>2.8.2</xunitRunnerVisualstudio>
+        <MicrosoftAspNetCoreMvcTesting>8.0.8</MicrosoftAspNetCoreMvcTesting>
+        <MicrosoftEntityFrameworkCoreInMemory>8.0.8</MicrosoftEntityFrameworkCoreInMemory>
+        <FluentAssertions>6.12.1</FluentAssertions>
+        <NSubstitute>5.1.0</NSubstitute>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Resolve high severity vulnerability -->
+        <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+        <PackageReference Include="System.Net.Http" Version="4.3.4" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        
+        <PackageReference Include="System.Text.Encodings.Web" Version="$(NetCoreVersion)" />
+        <PackageReference Include="System.Security.Cryptography.Xml" Version="$(NetCoreVersion)" />
+    </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,24 @@
+@host=http://localhost:5200
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjYxYmM1OTE4LTU0NWEtNDExOC05MjJkLTdhYjc1ZDdlOGVhZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJKb2huIERvZSIsIlByb2ZpbGUiOiJQYXJ0aWNpcGFudCM5NTFlZWE1Yi1iZDE4LTQ0OTktOTBiYi05MWU3OTFjZWFjMjMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJQYXJ0aWNpcGFudCIsImV4cCI6MTczNjQ1MjgwOCwiaXNzIjoiVXNlck1hbmFnZW1lbnQiLCJhdWQiOiJOZXh1c01hbmFnZW1lbnQifQ.t3FReelBr_jRtd4YCkYC1dOo5HiPkyf4BGQBptv5Ab0
+
+### List existing samples
+GET {{host}}/api/v1/sample
+
+### Create a new sample
+POST {{host}}/api/v1/sample
+Content-Type: application/json
+
+{
+    "Name": "S3",
+    "Description": "Sample 3"
+}
+
+### Update existing sample
+PUT {{host}}/api/v1/sample
+Content-Type: application/json
+
+{
+    "Id": "6edefa15-e3f4-49c6-a3a7-768b9db6963b",
+    "Name": "S3a",
+    "Description": "Sample 3333-112"
+}

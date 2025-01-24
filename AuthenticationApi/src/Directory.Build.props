@@ -1,0 +1,21 @@
+<Project>
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../../'))" />
+
+    <ItemGroup>
+        <!-- Used by: API, Application -->
+        <PackageReference Include="Ardalis.SmartEnum" Version="$(ArdalisSmartEnum)" />
+        <PackageReference Include="ErrorOr" Version="$(ErrorOr)" />
+        <PackageReference Include="MediatR" Version="$(MediatR)" />
+        <PackageReference Include="Throw" Version="$(Throw)" />
+        <PackageReference Include="FluentValidation" Version="$(FluentValidation)" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="$(FluentValidationAspNetCore)" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>UserManagement.Application.SubcutaneousTests</_Parameter1>
+        </AssemblyAttribute>
+        <InternalsVisibleTo Include="UserManagement.Application.SubcutaneousTests" />
+    </ItemGroup>
+
+</Project>

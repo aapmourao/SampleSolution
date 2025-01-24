@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <PackageReference Include="ErrorOr" Version="$(ErrorOr)" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="$(NetCoreVersion)" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="$(NetCoreVersion)" />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,36 @@
+version: '1.0' # You can use a different version if needed
+
+services:
+  rabbitmq:
+    image: rabbitmq:4.0.5-management
+    container_name: my-rabbitmq
+    ports:
+      - "5672:5672" # RabbitMQ default port for messaging
+      - "15672:15672" # RabbitMQ management UI port
+    environment:
+      RABBITMQ_DEFAULT_VHOST: my_vhost # Default virtual host
+    tty: true # Allows interactive terminal access (similar to -it)
+
+  postgres:
+    image: postgres:16.6
+    container_name: my-postgres
+    ports:
+      - "5432:5432" # PostgreSQL default port for database connections
+    environment:
+      POSTGRES_PASSWORD: postgres # Sets password for the default 'postgres' user
+      POSTGRES_DB: mySampleDb # Creates a database named 'my_db'
+
+  authenticationapi:
+    image: authapi:latest
+    container_name: my-authapi
+    build:
+      context: . # Path to the AuthenticationApi project
+      dockerfile: AuthenticationApi/src/Dockerfile # Dockerfile for the AuthenticationApi project
+    ports:
+      - "5100:8080" # Expose port 80 inside the container to port 5201 on the host
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__AuthApi: "Host=my-postgres;Database=AuthApi;Username=postgres;Password=postgres"
+    depends_on:
+      - postgres
+      - rabbitmq

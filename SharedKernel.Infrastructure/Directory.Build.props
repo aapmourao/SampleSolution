@@ -1,0 +1,9 @@
+<Project>
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="$(MediatR)" />
+        <PackageReference Include="Throw" Version="$(Throw)" />
+    </ItemGroup>
+
+</Project>
