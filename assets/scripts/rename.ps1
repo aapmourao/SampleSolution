@@ -1,7 +1,7 @@
 # Define the directory, search word, and replacement word
-$directory = "C:\_samples\SamplePermissions\src"
-$searchWord = "CleanTemplateProject"
-$replacementWord = "AuthApi"
+$directory = "C:\_samples\SampleSolution\CleanTemplate"
+$searchWord = "AuthApi"
+$replacementWord = "CleanTemplate"
 
 # Function to replace text in files
 function Replace-TextInFiles {

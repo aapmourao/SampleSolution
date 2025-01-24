@@ -1,0 +1,21 @@
+@host=http://localhost:5101
+
+### Login
+POST {{host}}/api/v1/authentication/login
+Content-Type: application/json
+
+{
+    "Email": "john.doe@nexus.com",
+    "Password": "Passw0rd!123"
+}
+
+### Register User
+POST {{host}}api/v1/Authentication/register
+Content-Type: application/json
+
+{
+    "FirstName": "john",
+    "LastName": "Doe",
+    "Email": "john.doe@nexus.com",
+    "Password": "Passw0rd!123"
+}

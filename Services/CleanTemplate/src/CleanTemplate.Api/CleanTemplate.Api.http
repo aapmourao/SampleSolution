@@ -1,0 +1,13 @@
+@http = http://localhost:5100
+
+GET {{http}}/api/sample/
+Accept: application/json
+
+###
+POST {{http}}/api/sample/
+Accept: application/json
+
+{
+  "name": "Test",
+  "description": "Test Description"
+}
