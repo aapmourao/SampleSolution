@@ -1,10 +1,16 @@
 using System.Reflection;
+
 using AuthApi.Domain.SampleAggregate;
+
+using Domain.UserRolesAggregate;
+
 using MediatR;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+
 using SharedKernel.Authorization.Interfaces;
 using SharedKernel.Infrastructure.Common.Settings;
 using SharedKernel.Infrastructure.Persistence;
@@ -23,6 +29,12 @@ public class InfrastructureDbContext(
         : BaseDbContext(options, httpContextAccessor, publisher, domainEnumFactory, configuration, databaseSelectorOptions, userIdentityService)
 {
     public DbSet<Sample> Samples { get; set; } = null!;
+
+
+    public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<UserRole> UserRoles { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
